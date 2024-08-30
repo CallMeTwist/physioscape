@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wellnesses', function (Blueprint $table) {
-            $table->id();
+        Schema::create('post_categories', function (Blueprint $table) {
+            $table->id(); // Primary key
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->text('activities')->nullable();
-            $table->text('benefits')->nullable();
             $table->string('slug')->unique();
-            $table->string('code');
             $table->timestamps();
+            $table->string('code');
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wellnesses');
+        Schema::dropIfExists('post_categories');
     }
 };
