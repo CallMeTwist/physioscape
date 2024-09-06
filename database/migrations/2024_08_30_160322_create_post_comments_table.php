@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('post_comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('user_id'); // The user who made the comment or admin(to be looked at)
+            $table->unsignedBigInteger('user_id');
             $table->text('content');
+            $table->boolean('visible')->default(true);
+            $table->string('code')->unique();
             $table->timestamps();
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('code');
+
         });
     }
 

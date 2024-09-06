@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('location');
-            $table->string('contact_email')->nullable();
-            $table->string('contact_phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->string('website')->nullable();
+            $table->string('image')->nullable();
             $table->string('slug')->unique();
             $table->string('code');
             $table->timestamps();

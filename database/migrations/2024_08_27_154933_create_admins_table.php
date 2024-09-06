@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAdminsTable extends Migration
 {
@@ -16,8 +17,13 @@ class CreateAdminsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone')->unique();
+            $table->string('avatar')->nullable();
+            $table->unsignedInteger('role_id');
             $table->string('password');
+            $table->string('code')->unique();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

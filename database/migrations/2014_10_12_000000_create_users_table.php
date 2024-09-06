@@ -15,9 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone')->unique();
+            $table->string('username')->unique();
+            $table->string('photo')->nullable();
+            $table->unsignedInteger('school_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('code')->unique();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\AdminAuth;
+namespace App\Http\Controllers\Admin\AdminAuth;
 
+use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    public $redirectTo = '/admin/home';
+    public $redirectTo = '/control/dashboard';
 
     /**
      * Create a new controller instance.
@@ -44,10 +45,13 @@ class LoginController extends Controller
     /**
      * Show the application's login form.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function showLoginForm()
     {
+        if(!Admin::first()){
+            Admin::create(['name' => config('app.name'), 'email' => 'admin@app.dev', 'password' => bcrypt('secret')]);
+        }
         return view('admin.auth.login');
     }
 

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Dashboard\DashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\AdminAuth\LoginController as AdminLogin;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,18 +19,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function () {
-  Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
-  Route::post('/login', 'AdminAuth\LoginController@login');
-  Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
+Route::namespace('Admin')->group(function() {
+    Route::group(['prefix' => 'control'], function(){
 
-  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
-  Route::post('/register', 'AdminAuth\RegisterController@register');
+        Route::namespace('AdminAuth')->group(function() {
+            Route::get('login', [AdminLogin::class, 'showLoginForm'])->name('admin.login');
+            Route::post('login', [AdminLogin::class, 'login'])->name('admin.login.post');
+            Route::get('logout', [AdminLogin::class, 'logout'])->name('admin.logout');
+        });
 
-  Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
-  Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+        Route::group(['middleware' => 'auth:admin', 'namespace' => 'Dashboard', 'prefix' => 'dashboard', 'as' => 'admin.'], function(){
+
+            Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
+            Route::get('/profile', [AdminDashboard::class, 'profile'])->name('profile');
+            Route::post('profile/update', [AdminDashboard::class, 'update'])->name('profile.update');
+            Route::post('profile/password', [AdminDashboard::class, 'password'])->name('profile.password');
+
+
+        });
+    });
 });
 
 Auth::routes();

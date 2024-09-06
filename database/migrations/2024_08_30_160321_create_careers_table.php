@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->string('photo');
             $table->string('location');
             $table->string('type');
             $table->dateTime('deadline');
-            $table->unsignedBigInteger('posted_by'); // The admin posting the job
+            $table->string('slug');
+            $table->string('code')->unique();
+            $table->boolean('expired')->default(false);
             $table->timestamps();
-            $table->foreign('posted_by')->references('id')->on('users')->onDelete('cascade');
-            $table->string('code');
         });
     }
 

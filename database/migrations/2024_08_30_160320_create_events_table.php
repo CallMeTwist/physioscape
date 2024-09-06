@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description')->nullable();
-            $table->date('start_time');
-            $table->date('end_time')->nullable();
+            $table->longtext('description');
+            $table->string('flyer')->nullable();
+            $table->dateTime('starting_at');
+            $table->dateTime('ending_at')->nullable();
             $table->string('location')->nullable();
-            $table->unsignedBigInteger('organizer_id'); // this is the id of the person of the admin role that will be organizing
-            $table->timestamps();
-            $table->foreign('organizer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('slug')->unique();
             $table->string('code');
+            $table->timestamps();
         });
     }
 
