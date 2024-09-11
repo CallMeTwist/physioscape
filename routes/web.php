@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Dashboard\CareersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Dashboard\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\AdminAuth\LoginController as AdminLogin;
@@ -34,6 +35,18 @@ Route::namespace('Admin')->group(function() {
             Route::get('/profile', [AdminDashboard::class, 'profile'])->name('profile');
             Route::post('profile/update', [AdminDashboard::class, 'update'])->name('profile.update');
             Route::post('profile/password', [AdminDashboard::class, 'password'])->name('profile.password');
+
+            // Career Routes
+            Route::group(['prefix' => 'careers', 'as' => 'careers.'], function(){
+                Route::get('/jobs', [CareersController::class, 'jobIndex'])->name('manage-jobs');
+                Route::get('/internships', [CareersController::class, 'internshipIndex'])->name('manage-internships');
+//                Route::post('/save', [BrandsController::class, 'create'])->name('create');
+//                Route::post('/update', [BrandsController::class, 'update'])->name('update');
+//                Route::post('/deactivate', [BrandsController::class, 'deactivate'])->name('deactivate');
+//                Route::post('/activate', [BrandsController::class, 'activate'])->name('activate');
+//                Route::post('/delete', [BrandsController::class, 'delete'])->name('delete');
+            });
+
 
 
         });

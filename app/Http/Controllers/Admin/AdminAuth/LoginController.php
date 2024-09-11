@@ -50,7 +50,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if(!Admin::first()){
-            Admin::create(['name' => config('app.name'), 'email' => 'admin@app.dev', 'password' => bcrypt('secret')]);
+            Admin::create(['name' => config('app.name'), 'email' => 'admin@app.dev', 'password' => bcrypt('secret'), 'phone' => '07064412910']);
         }
         return view('admin.auth.login');
     }

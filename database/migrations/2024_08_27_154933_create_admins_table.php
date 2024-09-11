@@ -19,9 +19,8 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('avatar')->nullable();
-            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('role_id')->nullable();
             $table->string('password');
-            $table->string('code')->unique();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
