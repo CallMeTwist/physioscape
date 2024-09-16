@@ -17,10 +17,11 @@ class RedirectIfAdmin
 	 */
 	public function handle($request, Closure $next, $guard = 'admin')
 	{
-	    if (Auth::guard($guard)->check()) {
-	        return redirect('control/dashboard');
-	    }
+        if (!Auth::guard($guard)->check()) {
+            return redirect()->route('admin.login'); // Adjust route as needed
+        }
 
-	    return $next($request);
+
+        return $next($request);
 	}
 }
