@@ -55,8 +55,8 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
-        'admin' => RedirectIfAdmin::class,
-        'admin.guest' => RedirectIfNotAdmin::class,
+        'admin' => RedirectIfNotAdmin::class,
+        'admin.guest' => RedirectIfAdmin::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,

@@ -197,10 +197,10 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="doctoRs">
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin.careers.manage-jobs') }}">add a career</a>
+                            <a class="dropdown-item" href="{{ route('admin.careers.add') }}">add a career</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin.careers.manage-internships') }}">Internship Opportunities</a>
+                            <a class="dropdown-item" href="{{ route('admin.careers.manage') }}">Manage Career</a>
                         </li>
                     </ul>
                 </li>

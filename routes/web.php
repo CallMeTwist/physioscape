@@ -38,10 +38,10 @@ Route::namespace('Admin')->group(function() {
 
             // Career Routes
             Route::group(['prefix' => 'careers', 'as' => 'careers.'], function(){
-                Route::get('/jobs', [CareersController::class, 'jobIndex'])->name('manage-jobs');
-                Route::get('/internships', [CareersController::class, 'internshipIndex'])->name('manage-internships');
-//                Route::post('/save', [BrandsController::class, 'create'])->name('create');
-//                Route::post('/update', [BrandsController::class, 'update'])->name('update');
+                Route::get('/', [CareersController::class, 'index'])->name('manage');
+                Route::get('/add', [CareersController::class, 'add'])->name('add');
+                Route::get('/view/{career}', [CareersController::class, 'view'])->name('view');
+                Route::post('/update', [CareersController::class, 'update'])->name('update');
 //                Route::post('/deactivate', [BrandsController::class, 'deactivate'])->name('deactivate');
 //                Route::post('/activate', [BrandsController::class, 'activate'])->name('activate');
 //                Route::post('/delete', [BrandsController::class, 'delete'])->name('delete');

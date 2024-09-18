@@ -20,14 +20,25 @@ class CareersController extends Controller
     /**
      * @return mixed
      */
-    public function jobIndex()
+    public function index()
     {
-        return view($this->path.'jobIndex');
+        $careers = $this->model->all();
+        return view($this->path.'index')->with('careers', $careers);
     }
 
-    public function internshipIndex()
+    public function add(Request $request)
     {
-        return view($this->path.'internshipIndex');
+        $request->validate([
+            'title'=>'required|string|max:225',
+            'description' => 'required|string',
+            'photo'=>'required|image|mimes:jpg,png|max:2000',
+            'location'=>'required|string|max:225',
+            'type'=>'required|string|max:225',
+            'deadline'=>'required|'
+//            'slug'=>'required|string|max:225',
+        ]);
+
+        return redirect()->back() ;
     }
 
 }
